@@ -1,0 +1,31 @@
+{
+  "name": "dockerworkshop_cdc",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "connector.displayName": "DockerWorkshop",
+    "topic.prefix": "cdc_",
+    "database.user": "postgres",
+    "database.dbname": "ecommerce_docker",
+    "decimal.handling.mode": "string",
+    "database.hostname": "postgres",
+    "database.password": "postgres",
+    "name": "dockerworkshop_cdc",
+    "schema.include.list": "public",
+    "connector.id": "postgres",
+    "plugin.name": "pgoutput",
+    "table.include.list": "public.*",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "snapshot.mode": "initial",
+    "tombstones.on.delete": "false",
+    "transforms": "flatten,TimestampConverter",
+    "transforms.flatten.type": "org.apache.kafka.connect.transforms.Flatten$Value",
+    "transforms.flatten.delimiter": ".",
+    "transforms.TimestampConverter.field": "timestamp",
+    "transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+    "transforms.TimestampConverter.target.type": "string",
+    "transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss"
+  }
+}

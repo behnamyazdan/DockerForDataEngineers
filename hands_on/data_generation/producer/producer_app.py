@@ -60,7 +60,7 @@ def generate_clickstream_data():
             "event_type": event_type
         }
         yield json.dumps(click_data)
-        time.sleep(1)  # Simulating some delay between generating each clickstream event
+        time.sleep(0.1)  # Simulating some delay between generating each clickstream event
 
 
 if __name__ == "__main__":
