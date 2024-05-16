@@ -2,8 +2,11 @@
 ## An Overview of Docker for Data Engineers
 This repository hosts materials for the Docker for Data Engineers workshop, offering hands-on exercises and resources tailored for data engineering professionals.
 
+- [Presentation Slides (download)](https://github.com/behnamyazdan/DockerForDataEngineers/blob/main/materials/DockerWorkshop_Presentation.pdf) 
+
 ## Docker images:
 
+---
 ```
 docker pull redis:7.2-alpine
 ```
