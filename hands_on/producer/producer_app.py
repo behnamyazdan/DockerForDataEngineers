@@ -1,4 +1,5 @@
 import json
+import os
 import time
 import redis
 import random
@@ -46,6 +47,9 @@ page_data = {
     "About_Us": "/pages/about_us",
 }
 
+redis_host = os.environ.get("REDIS_HOST", "127.0.0.1")
+redis_port = os.environ.get("REDIS_PORT", "6379")
+
 
 def generate_clickstream_data():
     while True:
@@ -59,12 +63,14 @@ def generate_clickstream_data():
             "timestamp": datetime.now().isoformat(),
             "event_type": event_type
         }
+        print("Data was generated: %s", click_data)
         yield json.dumps(click_data)
+        print("Waiting for next clickstream event...")
         time.sleep(0.1)  # Simulating some delay between generating each clickstream event
 
 
 if __name__ == "__main__":
-    r = redis.Redis(host='127.0.0.1', port=6379)
+    r = redis.Redis(host=redis_host, port=redis_port)
     for data in generate_clickstream_data():
         r.rpush('clickstream_queue', data)
-        print(data)
+        print("Data pushed into Redis queue!")

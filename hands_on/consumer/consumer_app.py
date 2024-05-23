@@ -11,6 +11,8 @@ db_password = os.environ.get("DB_PASSWORD", "postgres")
 db_host = os.environ.get("DB_HOST", "127.0.0.1")
 db_port = os.environ.get("DB_PORT", "54321")
 db_name = os.environ.get("DB_NAME", "ecommerce_docker")
+redis_host = os.environ.get("REDIS_HOST", "127.0.0.1")
+redis_port = os.environ.get("REDIS_PORT", "6379")
 
 try:
     connection = psycopg2.connect(
@@ -40,7 +42,7 @@ try:
     insert_query = '''INSERT INTO clickstream (user_id, page_title, page_url, timestamp, event_type)
                     VALUES (%s, %s, %s, %s, %s);'''
 
-    r = redis.Redis(host='127.0.0.1', port=6379)
+    r = redis.Redis(host=redis_host, port=redis_port)
     while True:
         data = r.blpop('clickstream_queue')
         data_json = json.loads(data[1])
